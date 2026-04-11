@@ -30,6 +30,7 @@ const Header = () => {
 
   return (
     <Container>
+      {/* Destop Design */}
       <div className="py-3 flex items-center justify-between">
         {/* Logo Section */}
         <Link to={"/"} className="flex w-fit items-center gap-2">
@@ -56,7 +57,10 @@ const Header = () => {
             <FaGithub size={18} />
             Contribute
           </Link>
-          <div className="cursor-pointer md:hidden" onClick={() => setToggle(!toggle)}>
+          <div
+            className="cursor-pointer md:hidden"
+            onClick={() => setToggle(!toggle)}
+          >
             {toggle ? <MdOutlineClose size={26} /> : <CiMenuFries size={26} />}
           </div>
         </div>
