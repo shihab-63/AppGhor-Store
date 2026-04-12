@@ -7,7 +7,7 @@ import { Link } from "react-router";
 
 const ErrorPage = () => {
   return (
-    <Container>
+
       <div className="flex flex-col min-h-screen">
         <Header />
         <div className="flex flex-col flex-1 text-center">
@@ -25,14 +25,14 @@ const ErrorPage = () => {
           </p>
           <Link
             to={"/"}
-            className="bg-linear-to-r from-[#632EE3] to-[#9F62F2] w-fit mx-auto py-2 px-6 rounded text-white font-semibold cursor-pointer active:scale-95"
+            className="bg-linear-to-r mb-12 from-[#632EE3] to-[#9F62F2] w-fit mx-auto py-2 px-6 rounded text-white font-semibold cursor-pointer active:scale-95"
           >
             Go Back!
           </Link>
         </div>
         <Footer />
       </div>
-    </Container>
+
   );
 };
 
