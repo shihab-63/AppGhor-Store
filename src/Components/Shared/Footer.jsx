@@ -4,7 +4,7 @@ import heroImg from "../../assets/logo.png";
 const Footer = () => {
   return (
     <footer className="bg-gray-50 text-gray-800 border-t border-gray-200">
-      <div className="container mx-auto py-12 md:py-16">
+      <div className="container mx-auto pt-12 pb-8 md:pt-16">
         <div className="flex flex-col md:flex-row justify-between mx-3 md:mx-0 gap-12 text-left">
           <div className="md:col-span-1 flex flex-col items-start">
             <div className="w-16 h-16 mb-5">

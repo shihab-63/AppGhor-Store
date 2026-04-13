@@ -10,18 +10,18 @@ const RatingSection = () => {
             Trusted by Millions, Built for You
           </h1>
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="bg-linear-to-r from-purple-500 to-pink-500 py-12 px-18 rounded-2xl text-center">
+            <div className="bg-linear-to-r from-purple-500 to-pink-500 py-12 px-18 rounded-2xl text-center hover:-translate-y-2 transition-all hover:shadow-xl duration-300">
               <p className="text-sm md:text-xl">Total Downloads</p>
               <p className="text-4xl md:text-5xl font-semibold py-2">29.6M</p>
 
               <p className="text-sm md:text-xl">21% more than last month</p>
             </div>
-            <div className="bg-linear-to-r from-sky-500 to-blue-600 py-12 px-18 rounded-2xl text-center">
+            <div className="bg-linear-to-r from-sky-500 to-blue-600 py-12 px-18 rounded-2xl text-center hover:-translate-y-2 transition-all hover:shadow-xl duration-300">
               <p className="text-sm md:text-xl">Total Reviews</p>
               <p className="text-4xl md:text-5xl font-semibold py-2">906K</p>
               <p className="text-sm md:text-xl">46% more than last month</p>
             </div>
-            <div className="bg-linear-to-r from-emerald-500 to-teal-400 py-12 px-24 rounded-2xl text-center">
+            <div className="bg-linear-to-r from-emerald-500 to-teal-400 py-12 px-24 rounded-2xl text-center hover:-translate-y-2 transition-all hover:shadow-xl duration-300">
               <p className="text-sm md:text-xl">Active Apps</p>
               <p className="text-4xl md:text-5xl font-semibold py-2">132+</p>
               <p className="text-sm md:text-xl">31 more will Launch</p>
