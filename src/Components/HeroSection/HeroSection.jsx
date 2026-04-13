@@ -6,7 +6,7 @@ import { Link } from "react-router";
 
 const HeroSection = () => {
   return (
-    <div className="flex flex-col gap-5 justify-center items-center mt-12 pb-10">
+    <div className="flex flex-col gap-5 justify-center items-center mt-12 bg-linear-to-b from-[#F7F2F7] to-[#e627bd36]">
       <h1 className="text-center text-2xl md:text-7xl font-semibold ">
         We Build <br className="hidden md:block" />{" "}
         <span className="bg-linear-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">

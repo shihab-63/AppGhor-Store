@@ -10,7 +10,7 @@ const useAppsData = () => {
     const fetchAppsData = async () => {
       try {
         const response = await axios("../appsData.json");
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 300));
         setApps(response.data);
       } catch (error) {
         setError(error.message || "Somting want Wrong...");

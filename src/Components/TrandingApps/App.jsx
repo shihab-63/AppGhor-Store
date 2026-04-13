@@ -1,11 +1,15 @@
 import React from "react";
 import { IoIosStar } from "react-icons/io";
 import { MdOutlineFileDownload } from "react-icons/md";
+import { Link } from "react-router";
 
-const Apps = ({ app }) => {
-  const { image, title, downloads, ratingAvg } = app;
+const App = ({ app }) => {
+  const { image, title, downloads, ratingAvg, id } = app;
   return (
-    <div className="card bg-base-100 shadow-sm rounded-xl p-3 md:p-5 cursor-pointer hover:border-blue-300 hover:border border border-transparent transition-all duration-500 hover:-translate-y-1">
+    <Link
+      to={`/appDetails/${id}`}
+      className="card bg-base-100 shadow-sm rounded-xl p-3 md:p-5 cursor-pointer hover:border-blue-300 hover:border border border-transparent transition-all duration-500 hover:-translate-y-1"
+    >
       <figure className="w-full">
         <img
           className="h-40 md:h-60 object-cover w-full rounded-xl"
@@ -25,8 +29,8 @@ const Apps = ({ app }) => {
           <IoIosStar className="text-amber-500" /> {ratingAvg}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
-export default Apps;
+export default App;

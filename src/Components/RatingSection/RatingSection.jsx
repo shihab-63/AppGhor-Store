@@ -3,10 +3,10 @@ import Container from "../Container/Container";
 
 const RatingSection = () => {
   return (
-    <div className="bg-linear-to-r from-[#642ee3d7] to-[#9e62f2e0]  min-h-44 md:min-h-96 text-white flex items-center">
+    <div className="bg-linear-to-r from-[#642ee3d7] to-[#9e62f2e0]  min-h-44 md:min-h-120 text-white flex items-center">
       <Container>
         <div className="flex justify-center items-center flex-col gap-8 py-8">
-          <h1 className="text-xl md:text-6xl text-center font-semibold">
+          <h1 className="text-xl md:text-6xl mb-8 text-center font-semibold">
             Trusted by Millions, Built for You
           </h1>
           <div className="flex flex-col md:flex-row items-center gap-8">

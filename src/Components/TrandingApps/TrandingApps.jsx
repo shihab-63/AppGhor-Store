@@ -1,9 +1,9 @@
 import React from "react";
 import Container from "../Container/Container";
 import useAppsData from "../../Hooks/useAppsData";
-import Apps from "./Apps";
 import { Link } from "react-router";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import App from "./App";
 
 const TrandingApps = () => {
   const { apps, loading } = useAppsData();
@@ -26,12 +26,15 @@ const TrandingApps = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 px-3 md:px-0 py-8">
             {eightApps.map((app) => (
-              <Apps key={app.id} app={app} />
+              <App key={app.id} app={app} />
             ))}
           </div>
         )}
         <div className="mx-auto flex justify-center">
-          <Link className="bg-linear-to-r from-[#9F62F2] to-[#632EE3] btn text-base px-10 py-6 text-white">
+          <Link
+            to={"/apps"}
+            className="bg-linear-to-r from-[#9F62F2] to-[#632EE3] btn text-base px-10 py-6 text-white"
+          >
             Show All
           </Link>
         </div>
