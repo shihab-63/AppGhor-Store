@@ -62,7 +62,7 @@ const SingleApp = ({ app }) => {
           <div className="flex items-center justify-around gap-8 px-12 py-4 md:py-8 rounded-xl shadow bg-white my-6">
             <div className="text-center">
               <img
-                className="mx-auto pb-2"
+                className="mx-auto w-7 md:w-fit pb-2"
                 src={downloadImg}
                 alt="Download Image"
               />
@@ -75,7 +75,7 @@ const SingleApp = ({ app }) => {
             </div>
             <div className="text-center">
               <img
-                className="mx-auto pb-2"
+                className="mx-auto w-8 md:w-fit pb-2"
                 src={ratingImg}
                 alt="Download Image"
               />
@@ -86,7 +86,7 @@ const SingleApp = ({ app }) => {
             </div>
             <div className="text-center">
               <img
-                className="mx-auto pb-2"
+                className="w-9 md:w-fit mx-auto pb-2"
                 src={reviewImg}
                 alt="Download Image"
               />
