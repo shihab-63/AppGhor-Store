@@ -102,7 +102,7 @@ const SingleApp = ({ app }) => {
             <button
               onClick={handleInstallBtn}
               disabled={isInstall}
-              className={`btn px-12 border-none text-white transition-all duration-300 ${
+              className={`btn px-12 md:py-6 border-none text-white transition-all duration-300 ${
                 isInstall
                   ? "bg-gray-400"
                   : "bg-linear-to-r from-violet-600 to-fuchsia-500 shadow-md"

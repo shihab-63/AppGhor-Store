@@ -3,8 +3,8 @@ import useAppsData from "../../Hooks/useAppsData";
 import Container from "../Container/Container";
 import { Link, ScrollRestoration, useNavigate, useParams } from "react-router";
 import { ChevronLeft, MoveLeft } from "lucide-react";
-import SingleApp from "./singleApp";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import SingleApp from "./SingleApp.jsx";
 
 const AppDetails = () => {
   const navigate = useNavigate();
