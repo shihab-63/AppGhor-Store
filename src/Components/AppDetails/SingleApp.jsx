@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import Container from "../Container/Container";
+import { addToInstalled, getInstalledData } from "../../Utils/localStorage";
+
+// Assets
 import downloadImg from "../../assets/icon-downloads.png";
 import ratingImg from "../../assets/icon-ratings.png";
 import reviewImg from "../../assets/icon-review.png";
-import { Link } from "react-router";
-import Swal from "sweetalert2";
-import Container from "../Container/Container";
 
 const SingleApp = ({ app }) => {
-  const [isInstall, setIsinstall] = useState(false);
+  // Lazy Initialization
+  const [isInstalled, setIsInstalled] = useState(() => {
+    const savedData = getInstalledData();
+    return savedData.some((p) => p?.id === app?.id);
+  });
+
+  if (!app) return null;
+
   const {
     image,
     title,
@@ -19,111 +28,135 @@ const SingleApp = ({ app }) => {
     reviews,
   } = app;
 
-  const handleInstallBtn = () => {
-    Swal.fire({
-      title: `Do you want to Install ${title}?`,
-      showDenyButton: true,
-      confirmButtonText: "Install",
-      denyButtonText: `Don't Install`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setIsinstall(true);
-        Swal.fire(
-          "Installed!",
-          `${title} has been installed successfully`,
-          "success",
-        );
-      } else if (result.isDenied)
-        Swal.fire("Cancelled", "Installation was cancelled", "info");
-    });
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat("en-US", { notation: "compact" }).format(
+      num || 0,
+    );
   };
+
+  const handleInstall = async () => {
+    if (isInstalled) return;
+
+    const result = await Swal.fire({
+      title: `Install ${title}?`,
+      text: "Do you want to proceed with the installation?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#8b5cf6",
+      cancelButtonColor: "#ef4444",
+      confirmButtonText: "Yes, Install",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      const isSuccess = addToInstalled(app);
+
+      if (isSuccess) {
+        setIsInstalled(true);
+        Swal.fire({
+          title: "Installed!",
+          text: `${title} has been installed successfully.`,
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } else {
+        Swal.fire("Oops!", "Failed to install or already installed.", "error");
+      }
+    }
+  };
+
   return (
     <Container>
-      <div className="flex flex-col md:flex-row items-center gap-8">
-        <figure>
+      {/* Main Content Wrapper */}
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-10 mt-8">
+        {/* App Image */}
+        <figure className="shrink-0">
           <img
-            className="w-72 md:w-96 md:h-80 shadow-xl object-cover rounded-2xl"
+            className="w-72 md:w-96 md:h-80 shadow-lg object-cover rounded-3xl border border-gray-100"
             src={image}
-            alt={title}
+            alt={`${title} thumbnail`}
           />
         </figure>
 
-        <div className="flex-1 ">
-          <div className="">
-            <h1 className="text-2xl md:text-4xl font-semibold">{title}</h1>
-            <p className="pt-1 pb-5 text-gray-400">
+        {/* App Details */}
+        <div className="flex-1 w-full text-center md:text-left">
+          <header className="mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-800 tracking-tight">
+              {title}
+            </h1>
+            <p className="pt-2 text-gray-500 font-medium tracking-wide">
               Developed by{" "}
-              <span className="font-bold bg-linear-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              <span className="font-bold bg-linear-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
                 {companyName}
               </span>
             </p>
+          </header>
+
+          <hr className="border-gray-200 mb-6" />
+
+          {/* Stats Section */}
+          <div className="flex items-center justify-around px-6 md:px-12 py-6 rounded-2xl shadow-sm bg-white border border-gray-50 my-8">
+            <StatCard
+              icon={downloadImg}
+              title="Downloads"
+              value={formatNumber(downloads)}
+              valueColor="text-green-500"
+            />
+            <StatCard
+              icon={ratingImg}
+              title="Ratings"
+              value={ratingAvg}
+              valueColor="text-amber-500"
+            />
+            <StatCard
+              icon={reviewImg}
+              title="Reviews"
+              value={formatNumber(reviews)}
+              valueColor="text-violet-500"
+            />
           </div>
-          <hr className="border-gray-300" />
-          <div className="flex items-center justify-around gap-8 px-12 py-4 md:py-8 rounded-xl shadow bg-white my-6">
-            <div className="text-center">
-              <img
-                className="mx-auto w-7 md:w-fit pb-2"
-                src={downloadImg}
-                alt="Download Image"
-              />
-              <span className="text-base pb-2 text-gray-400">Downloads</span>
-              <p className="text-2xl md:text-3xl text-green-500 font-bold">
-                {new Intl.NumberFormat("en-US", { notation: "compact" }).format(
-                  downloads,
-                )}
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                className="mx-auto w-8 md:w-fit pb-2"
-                src={ratingImg}
-                alt="Download Image"
-              />
-              <span className="text-base pb-2 text-gray-400">Ratings</span>
-              <p className="text-2xl md:text-3xl text-amber-500 font-bold">
-                {ratingAvg}
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                className="w-9 md:w-fit mx-auto pb-2"
-                src={reviewImg}
-                alt="Download Image"
-              />
-              <span className="text-base pb-2 text-gray-400">Reviews</span>
-              <p className="text-2xl md:text-3xl text-violet-500 font-bold">
-                {new Intl.NumberFormat("en-US", { notation: "compact" }).format(
-                  reviews,
-                )}
-              </p>
-            </div>
-          </div>
+
+          {/* Action Button */}
           <div className="mb-8">
             <button
-              onClick={handleInstallBtn}
-              disabled={isInstall}
-              className={`btn px-12 md:py-6 border-none text-white transition-all duration-300 ${
-                isInstall
-                  ? "bg-gray-400"
-                  : "bg-linear-to-r from-violet-600 to-fuchsia-500 shadow-md"
+              onClick={handleInstall}
+              className={`btn px-12 md:px-14 py-4 md:py-4 rounded-xl border-none text-white text-lg font-semibold transition-all duration-300 ${
+                isInstalled
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-inner"
+                  : "bg-linear-to-r from-violet-600 to-fuchsia-500 shadow-xl hover:shadow-violet-500/30 hover:-translate-y-1"
               }`}
             >
-              {isInstall ? "Installed" : ` Install (${size} MB)`}
+              {isInstalled ? "✓ Installed" : `Install App (${size} MB)`}
             </button>
           </div>
         </div>
       </div>
-      <div className="mb-8 md:w-92 md:max-w-3xl lg:w-full text-center mx-auto">
-        <h1 className="font-heading font-heading text-3xl font-semibold mb-6 text-slate-800 relative inline-block">
+
+      {/* Description Section */}
+      <div className="mt-16 mb-12 md:max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-gray-800 relative inline-block mb-8">
           Description
-          <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-52 h-0.75 bg-linear-to-r from-blue-500 to-indigo-500/50 rounded-full"></span>
-        </h1>
-        <p className="font-p text-sm md:text-lg text-slate-600 leading-relaxed text-justify md:text-center">
+          <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-linear-to-r from-violet-500 to-fuchsia-500 rounded-full opacity-80"></span>
+        </h2>
+        <p className="text-base md:text-lg text-gray-600 leading-relaxed text-justify md:text-center px-4">
           {description}
         </p>
       </div>
     </Container>
   );
 };
+
+const StatCard = ({ icon, title, value, valueColor }) => (
+  <div className="flex flex-col items-center gap-2">
+    <img className="w-8 h-8 object-contain opacity-80" src={icon} alt={title} />
+    <span className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider">
+      {title}
+    </span>
+    <p className={`text-2xl md:text-3xl font-extrabold ${valueColor}`}>
+      {value}
+    </p>
+  </div>
+);
 
 export default SingleApp;
