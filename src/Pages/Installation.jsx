@@ -7,7 +7,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Installation = () => {
   const [installData, setInstallData] = useState(() => getInstalledData());
-
+  
   return (
     <div className="px-3 md:px-0">
       <Container>

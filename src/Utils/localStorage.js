@@ -24,3 +24,14 @@ export const addToInstalled = (app) => {
     return false;
   }
 };
+
+// Removed
+export const removedApp = (id) => {
+  const getApp = getInstalledData();
+  try {
+    const removed = getApp.filter((app) => app.id !== id);
+    localStorage.setItem("installed", JSON.stringify(removed));
+  } catch (error) {
+    console.error(error);
+  }
+};
