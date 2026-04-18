@@ -121,7 +121,7 @@ const SingleApp = ({ app }) => {
           <div className="mb-8">
             <button
               onClick={handleInstall}
-              className={`btn px-12 md:px-14 py-4 md:py-4 rounded-xl border-none text-white text-lg font-semibold transition-all duration-300 ${
+              className={`btn px-12 md:px-14 py-4 md:py-6 rounded border-none text-white text-lg font-semibold transition-all duration-300 ${
                 isInstalled
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-inner"
                   : "bg-linear-to-r from-violet-600 to-fuchsia-500 shadow-xl hover:shadow-violet-500/30 hover:-translate-y-1"
