@@ -9,7 +9,7 @@ const useAppsData = () => {
   useEffect(() => {
     const fetchAppsData = async () => {
       try {
-        const response = await axios("../appsData.json");
+        const response = await axios("/appsData.json");
         await new Promise((resolve) => setTimeout(resolve, 300));
         setApps(response.data);
       } catch (error) {
